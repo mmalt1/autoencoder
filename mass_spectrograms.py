@@ -8,13 +8,22 @@ def wav_to_spec(directory, save_dir):
     counter = 0
     # dir = os.fsencode(directory)
     for file in os.scandir(directory):
-        y, sr = librosa.load(file, sr=None) # sr in LibriTTS = 24kHz
+    #     y, sr = librosa.load(file, sr=None) # sr in LibriTTS = 24kHz
+    #     print("sr ", sr)
+    #     D = librosa.stft(y)
+    #     S_db = librosa.amplitude_to_db(abs(D), ref=np.max)
+    #     librosa.display.specshow(S_db, sr=sr)
+    #     # plt.title('Waveform')
+    #     # plt.savefig(f"{save_dir}/spectrogram{counter:05}.png")
+    #     counter += 1
+        wav, sr = librosa.load(file, sr=24000) # sr in LibriTTS = 24kHz
         print("sr ", sr)
-        D = librosa.stft(y)
-        S_db = librosa.amplitude_to_db(abs(D), ref=np.max)
-        librosa.display.specshow(S_db, sr=sr)
+        stft_wav = librosa.stft(wav)
+        spec = librosa.amplitude_to_db(abs(stft_wav), ref=np.max)
+        mel_spec = librosa.feature.melspectrogram(S=spec)
+        librosa.display.specshow(mel_spec, sr=sr)
         # plt.title('Waveform')
-        # plt.savefig(f"{save_dir}/spectrogram{counter:05}.png")
+        plt.savefig(f"{save_dir}/mel_spectrogram{counter:05}.png")
         counter += 1
 
 
