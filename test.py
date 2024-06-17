@@ -1,7 +1,7 @@
 import os
 import numpy as np
 
-dir = "./chopped_arrays"
+dir = "./spec_arrays"
 
 for array in os.scandir(dir):
     print(array)

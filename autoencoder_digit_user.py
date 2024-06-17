@@ -54,11 +54,11 @@ def visualize_image(image_path, predicted_image_tensor):
 
 device = torch.device("cpu")
 model = Autoencoder().to(device)
-model.load_state_dict(torch.load("testing_no_internet_data.pt"))
-img = load_and_preprocess_image("handwritten_digits/mnist_7.png")
+model.load_state_dict(torch.load("mnist_autoencoder.pt"))
+img = load_and_preprocess_image("handwritten_digits/seven.jpeg")
 print(img.size())
 
 predicted_image = predict_image_output(model, img)
 # print("predicted digit: ", predicted_digit)
 
-visualize_image("handwritten_digits/mnist_7.png", predicted_image)
+visualize_image("handwritten_digits/seven.jpeg", predicted_image)
