@@ -74,6 +74,8 @@ def train(args, model, device, train_loader, optimizer, epoch):
     distance = nn.MSELoss()
     # train_loss = 0
     for batch_idx, (data, _) in enumerate(train_loader):
+        print("batch index: ", batch_idx)
+        print("data: ", data)
         data = Variable(data).to(device)
         output = model(data)
         loss = distance(output, data)

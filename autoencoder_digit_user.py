@@ -21,6 +21,7 @@ def load_and_preprocess_image(image_path):
     image = Image.open(image_path)
     image = transform(image)
     image = image.unsqueeze(0)  # Add batch dimension
+    print(image)
     return image
 
 def predict_image_output(model, image_tensor):
@@ -55,10 +56,10 @@ def visualize_image(image_path, predicted_image_tensor):
 device = torch.device("cpu")
 model = Autoencoder().to(device)
 model.load_state_dict(torch.load("mnist_autoencoder.pt"))
-img = load_and_preprocess_image("handwritten_digits/seven.jpeg")
+img = load_and_preprocess_image("handwritten_digits/other_seven.png")
 print(img.size())
 
 predicted_image = predict_image_output(model, img)
 # print("predicted digit: ", predicted_digit)
 
-visualize_image("handwritten_digits/seven.jpeg", predicted_image)
+visualize_image("handwritten_digits/other_seven.png", predicted_image)
